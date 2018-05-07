@@ -1,19 +1,16 @@
-let fetch = require( "node-fetch" );
-let Prompts = require( "./prompts" ).languages;
-let Constants = require( "./constants.js" );
-let trim = require( "trim" );
-let sprintf = require( "sprintf-js" ).sprintf;
+import fetch from "node-fetch";
+import Prompts from "./prompts";
+import Constants from "./constants.js" ;
+import trim from "trim";
+import sprintf from "sprintf-js";
 
-const getRandomNumber = function (min, max) {
+export const getRandomNumber = function (min, max) {
 	return Math.floor( Math.random() * (max - min + 1) ) + min;
 };
 
-exports.getRandomNumber = getRandomNumber;
-
-const getRandomPrompt = function (arr) {
+export const  getRandomPrompt = function (arr) {
 	return arr[ getRandomNumber( 0, arr.length - 1 ) ];
 };
-exports.getRandomPrompt = getRandomPrompt;
 
 
 const calculateLevenshtein = function (a, b) {
@@ -54,7 +51,7 @@ const calculateLevenshtein = function (a, b) {
 	return matrix[ b.length ][ a.length ];
 };
 
-exports.getClosest = function (query, options) {
+export const getClosest = function (query, options) {
 	let maxDistance = 1000;
 	let pick = null;
 	for (let i = 0; i < options.length; i++) {
@@ -73,7 +70,7 @@ exports.getClosest = function (query, options) {
 };
 
 //Reduce a generic list to a summation with correct interpunction and couple words.
-exports.listToSentence = function (lang, arr, itemHandler, finalCoupler) {
+export const listToSentence = function (lang, arr, itemHandler, finalCoupler) {
 	if (!itemHandler) {
 		itemHandler = a => a;
 	}
@@ -130,7 +127,7 @@ function checkResponse(app, lang='en') {
 	};
 }
 
-exports.get = function (app, endpoint) {
+export const get = function (app, endpoint) {
 	return fetch( endpoint, {
 		method: "GET",
 		headers: {
@@ -147,7 +144,7 @@ exports.get = function (app, endpoint) {
 		} );
 };
 
-exports.post = function (app, endpoint, data) {
+export const post = function (app, endpoint, data) {
 	return fetch( endpoint, {
 		method: "POST",
 		headers: {
@@ -157,7 +154,8 @@ exports.post = function (app, endpoint, data) {
 		body: JSON.stringify( data )
 	} );
 };
-class TimedOutPromiseResult{
+
+export class TimedOutPromiseResult{
 	constructor(isTimedOut, result){
 		this.isTimedOut = isTimedOut;
 		this.result = result;
@@ -175,8 +173,8 @@ class TimedOutPromiseResult{
 		});
 	}
 }
-exports.TimedOutPromiseResult = TimedOutPromiseResult;
-exports.promiseWithTimeout = function(promise, timeout){
+
+export const promiseWithTimeout = function(promise, timeout){
 	let isTimedOut = false;
 	let timeoutPromise = new Promise(function(resolve, reject){
 		setTimeout(function(){
@@ -193,7 +191,7 @@ exports.promiseWithTimeout = function(promise, timeout){
 	return Promise.race([wrappedPromise, timeoutPromise]);
 };
 
-exports.fakePromise = function(timeout){
+export const fakePromise = function(timeout){
 	return new Promise(function(resolve, reject){
 		setTimeout(function(){
 			resolve();
@@ -201,7 +199,7 @@ exports.fakePromise = function(timeout){
 	})
 };
 
-exports.ordinalToNumber = function (ordinal) {
+export const ordinalToNumber = function (ordinal) {
 	if(ordinal === null) return 1;
 
 	ordinal = trim( ordinal.toString() );

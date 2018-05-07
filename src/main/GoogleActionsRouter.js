@@ -1,4 +1,4 @@
-class GoogleActionsRouter{
+export default class GoogleActionsRouter{
 	constructor(actionmap){
 		if (actionmap === null || typeof actionmap === "undefined") {
 			this.actionMap = new Map();
@@ -32,4 +32,3 @@ class GoogleActionsRouter{
 	};
 }
 
-exports.GoogleActionsRouter = GoogleActionsRouter;

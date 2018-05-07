@@ -1,5 +1,6 @@
-let sprintf = require( "sprintf-js" ).sprintf;
-class RouteHandler{
+import sprintf from 'sprintf-js';
+
+export default class RouteHandler{
 	constructor(language){
 		this.language = language;
 	}
@@ -23,4 +24,3 @@ class RouteHandler{
 		app.ask(sprintf("<speak>%s</speak>", msg));
 	}
 }
-exports.RouteHandler = RouteHandler;

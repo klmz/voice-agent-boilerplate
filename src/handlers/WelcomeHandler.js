@@ -1,10 +1,10 @@
-let RouteHandler = require( "./RouteHandler" ).RouteHandler;
-let Constants = require( "../main/constants" );
-let Utils = require( "../main/utils.js" );
-let Prompts = require( "../main/prompts" ).languages;
-let sprintf = require( "sprintf-js" ).sprintf;
+import RouteHandler from"./RouteHandler";
+import Constants from"../main/constants" ;
+import Utils from"../main/utils.js" ;
+import Prompts from"../main/prompts";
+import sprintf from"sprintf-js";
 
-class WelcomeHandler extends RouteHandler {
+export default class WelcomeHandler extends RouteHandler {
 	constructor(language) {
 		super(language);
 
@@ -26,8 +26,10 @@ class WelcomeHandler extends RouteHandler {
 		console.log('Fallbackhandler');
 		console.log(app.data);
 		if(app.data.fallbackCount === null) app.data.fallbackCount = 0;
+		
 		app.data.fallbackCount = parseInt( app.data.fallbackCount, 10 );
 		app.data.fallbackCount++;
+		
 		if (app.data.fallbackCount > 3) {
 			app.tell( Prompts[this.language].FINAL_FALLBACK );
 		} else {
@@ -45,5 +47,3 @@ class WelcomeHandler extends RouteHandler {
 	}
 
 }
-
-exports.WelcomeHandler = WelcomeHandler;

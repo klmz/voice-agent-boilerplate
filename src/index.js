@@ -1,13 +1,13 @@
 process.env.DEBUG = "actions-on-google:*";
-let DialogflowApp = require( "actions-on-google" ).DialogflowApp;
-let Utils = require( "./main/utils.js" );
-let Constants = require( "./main/constants.js" );
-let GoogleActionsRouter = require('./main/GoogleActionsRouter').GoogleActionsRouter;
-let {MemoryHandler, WelcomeHandler} = require("./handlers");
+import { DialogflowApp } from "actions-on-google"
+import Utils from "./main/utils";
+import Contstants from "./main/constants";
+import GoogleActionsRouter from  "./main/GoogleActionsRouter";
+import {MemoryHandler, WelcomeHandler} from "./handlers";
 
 let useSentimentAnalysis = process.env.USE_SENTIMENT_ANALYSIS == "true"
 
-exports.voiceAgent = (request, response) => {
+const voiceAgent = (request, response) => {
 	let lang = request.body.lang;
 	// let lang = request.body.queryResult.languageCode;
 	console.log(request.body);
@@ -29,3 +29,5 @@ exports.voiceAgent = (request, response) => {
 	console.log("Complete Map", router.getMap());
 	router.handleRequest(app);
 };
+
+export default voiceAgent;

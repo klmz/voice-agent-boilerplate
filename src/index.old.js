@@ -1,12 +1,11 @@
 process.env.DEBUG = 'actions-on-google:*';
-let Prompts = require( "./main/prompts" ).languages;
 
-let express = require('express');
-let bodyParser = require('body-parser');
+import express from'express';
+import bodyParser from'body-parser';
+import sprintf from "sprintf-js";
+import voiceAgent from "./index.js";
+
 let app = express();
-let sprintf = require( "sprintf-js" ).sprintf;
-let voiceAgent = require('./index.js').voiceAgent;
-
 app.set('port', (process.env.PORT || 8080));
 app.use(bodyParser.json({
     type: 'application/json'
