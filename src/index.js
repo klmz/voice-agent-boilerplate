@@ -23,8 +23,7 @@ const voiceAgent = (request, response) => {
 	} );
 
 	let router = new GoogleActionsRouter();
-	// router.addRouteHandler(new WelcomeHandler(lang));
-	router.addRouteHandler(new MemoryHandler(lang));
+	router.addRouteHandler(new WelcomeHandler(lang));
 	
 	console.log("Complete Map", router.getMap());
 	router.handleRequest(app);
